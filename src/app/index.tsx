@@ -1337,7 +1337,7 @@ export default function AttendanceChecker() {
             value={section}
             onChangeText={setSection}
             placeholder="Enter section"
-            placeholderTextColor="#8A94A6"
+            placeholderTextColor="#4982eb"
           />
 
           <Text
