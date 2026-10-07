@@ -1470,7 +1470,7 @@ export default function AttendanceChecker() {
 
         {/* ADD STUDENT */}
         <Text style={styles.sectionTitle}>
-          Add a Student
+          Add Student
         </Text>
 
         <AddStudent
