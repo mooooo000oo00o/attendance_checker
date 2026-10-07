@@ -1,56 +1,254 @@
-# Welcome to your Expo app 👋
+# Attendance Checker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple mobile attendance management application designed for teachers. The app allows teachers to add students, record their attendance, and save attendance records for future viewing.
 
-## Get started
+## 📱 Features
 
-1. Install dependencies
+* Add student names manually
+* Mark students as:
 
-   ```bash
-   npm install
-   ```
+  * ✅ Present
+  * ⏰ Late
+  * ❌ Absent
+* Record the number of minutes a student is late
+* Enter the class section
+* Enter the subject
+* Automatically display the current date and time
+* View attendance summaries
+* Save attendance records
+* View saved records by:
 
-2. Start the app
+  * Section
+  * Subject
+  * Date
+* View individual student attendance details
+* Delete saved attendance records
+* Records remain saved after closing and reopening the app
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Technologies Used
 
-In the output, you'll find options to open the app in a
+* React Native
+* Expo
+* TypeScript
+* AsyncStorage
+* Visual Studio Code
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📂 Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+AttendanceChecker
+└── src
+    ├── app
+    │   ├── _layout.tsx
+    │   └── index.tsx
+    │
+    ├── components
+    │   ├── AttendanceSummary.tsx
+    │   ├── StudentRow.tsx
+    │   ├── AddStudent.tsx
+    │   └── LateMinutes.tsx
+    │
+    └── styles
+        └── attendanceStyles.ts
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## ⚙️ How It Works
 
-### Other setup steps
+### 1. Enter Class Information
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+The teacher enters the class section and subject.
 
-## Learn more
+Example:
 
-To learn more about developing your project with Expo, look at the following resources:
+```text
+Section: BSIT 4A
+Subject: ITM101
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The application automatically displays the current date and time from the device.
 
-## Join the community
+### 2. Add Students
 
-Join our community of developers creating universal apps.
+The teacher enters student names manually using the **Add Student** field.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Each student is added to the attendance list.
+
+### 3. Mark Attendance
+
+Each student can be marked as:
+
+* Present
+* Late
+* Absent
+
+Only one attendance status can be selected for each student.
+
+### 4. Record Late Minutes
+
+If a student is marked as Late, a field appears where the teacher can enter the number of minutes late.
+
+Example:
+
+```text
+Late: 10 minutes
+```
+
+### 5. Save Attendance
+
+After all students have been marked, the teacher can press **Save Attendance**.
+
+The attendance record contains:
+
+* Section
+* Subject
+* Date
+* Time
+* Student names
+* Attendance status
+* Late minutes
+
+### 6. View Records
+
+Saved attendance can be accessed through the **Records** button.
+
+Records are organized like this:
+
+```text
+Section
+   ↓
+Subject
+   ↓
+Date
+   ↓
+Student Attendance Details
+```
+
+For example:
+
+```text
+BSIT 4A
+   └── ITM101
+        ├── Oct 7
+        └── Oct 6
+```
+
+### 7. Persistent Storage
+
+The application uses **AsyncStorage** to save attendance records on the device.
+
+This allows saved records to remain available even after the application is closed and opened again.
+
+## 🧩 Main Components
+
+### `index.tsx`
+
+The main part of the application.
+
+It handles:
+
+* Section
+* Subject
+* Students
+* Attendance status
+* Late minutes
+* Saving attendance
+* Loading records
+* Records navigation
+* Deleting records
+
+### `StudentRow.tsx`
+
+Displays each student and allows the teacher to:
+
+* Mark Present
+* Mark Late
+* Mark Absent
+* Enter late minutes
+* Delete a student
+
+### `AddStudent.tsx`
+
+Handles adding new student names to the attendance list.
+
+### `AttendanceSummary.tsx`
+
+Displays the attendance totals:
+
+```text
+Total
+Present
+Late
+Absent
+```
+
+### `LateMinutes.tsx`
+
+A separate component created for handling late-minute input. The current attendance interface handles the late-minute input directly inside `StudentRow.tsx`.
+
+### `attendanceStyles.ts`
+
+Contains the application's styles and controls the visual appearance of the interface.
+
+## 💾 Data Storage
+
+The application uses:
+
+```text
+AsyncStorage
+```
+
+to store attendance records locally.
+
+JavaScript objects are converted into text using:
+
+```text
+JSON.stringify()
+```
+
+and converted back into JavaScript objects using:
+
+```text
+JSON.parse()
+```
+
+## 🚀 Installation
+
+Make sure Node.js is installed on your computer.
+
+Clone or download the project, then open the project folder in Visual Studio Code.
+
+Install the project dependencies:
+
+```bash
+npm install
+```
+
+Start the Expo development server:
+
+```bash
+npx expo start
+```
+
+The application can then be opened using Expo Go or an available emulator.
+
+## 🎓 Project Purpose
+
+Attendance Checker was created as a school project to demonstrate the use of mobile application development concepts, including:
+
+* React Native components
+* TypeScript
+* State management
+* User input
+* Component communication
+* Event handling
+* Conditional rendering
+* Local data storage
+* Basic CRUD operations
+
+## 👩‍💻 Developer
+
+Created as a college IT school project.
+
+---
+
+**Attendance Checker — Simple, organized, and teacher-friendly attendance management.**
